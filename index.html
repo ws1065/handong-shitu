@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#efe6d3">
+<title>汉东仕途 · 人民的名义同人策略游戏</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="stage-grain" aria-hidden="true"></div>
+<div class="stage-ornament stage-ornament--tl" aria-hidden="true"></div>
+<div class="stage-ornament stage-ornament--br" aria-hidden="true"></div>
+
+<div id="app">
+
+  <!-- ================= 开始页 ================= -->
+  <section id="start-screen" class="screen start-screen">
+    <div class="start-shell">
+      <header class="start-topline">
+        <span class="brand-mark">汉东</span>
+        <span class="start-topline__text">汉东省 · 京州市 · 二〇一〇</span>
+        <span class="start-topline__rule"></span>
+        <span class="start-topline__note">非商业同人作品</span>
+      </header>
+
+      <div class="start-hero">
+        <div class="start-hero__ink" aria-hidden="true">
+          <svg viewBox="0 0 520 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 220 C70 190 96 205 142 174 C188 143 208 160 252 128 C296 96 322 118 364 92 C406 66 444 84 520 48 L520 260 L0 260 Z" fill="currentColor" opacity=".07"/>
+            <path d="M0 244 C64 224 112 236 158 212 C204 188 246 202 292 176 C338 150 386 166 432 142 C478 118 502 126 520 116 L520 260 L0 260 Z" fill="currentColor" opacity=".1"/>
+            <circle cx="410" cy="56" r="24" fill="currentColor" opacity=".12"/>
+            <path d="M60 64 q8 -7 16 0 M84 54 q8 -7 16 0" stroke="currentColor" stroke-width="1.4" opacity=".35"/>
+          </svg>
+        </div>
+
+        <div class="start-seal" aria-hidden="true">
+          <span>汉东</span>
+        </div>
+
+        <p class="start-eyebrow">根据周梅森《人民的名义》背景设定</p>
+        <h1 class="start-title">仕途</h1>
+        <p class="start-subtitle">一纸调令，半生沉浮</p>
+        <p class="start-lede">
+          二〇一〇年，你走出校门，进入汉东省京州市的机关大院。<br>
+          此后三十余年，六十四段故事里，二十个路口会依次到来。<br>
+          每个路口背后有三十种走法，但每次只给你三条；换一局，场景与选项都会不同。<br>
+          从科员到中央政治局常委，反腐风暴、城市开发、派系博弈将轮番从你身边经过。<br>
+          你会走到哪一步，又会成为哪一种人？
+        </p>
+        <div class="start-quote">
+          <span>“权力是人民赋予的，只能用来为人民谋利益。”</span>
+        </div>
+      </div>
+
+      <div class="start-form">
+        <div class="start-field">
+          <label class="start-label" for="player-name">姓名</label>
+          <div class="name-line">
+            <input id="player-name" class="name-input" type="text" maxlength="8" placeholder="林川" autocomplete="off" spellcheck="false">
+            <span class="name-line__hint">二至四字为宜</span>
+          </div>
+        </div>
+
+        <div class="start-field">
+          <div class="start-label-row">
+            <span class="start-label">出身</span>
+            <span class="start-label__hint">决定起点、初始属性与专长</span>
+          </div>
+          <div id="origin-grid" class="origin-grid"></div>
+        </div>
+
+        <div class="start-actions">
+          <button id="btn-start" class="btn btn--primary btn--large" type="button">踏入仕途</button>
+          <button id="btn-continue" class="btn btn--ghost btn--large hidden" type="button">继续上次仕途</button>
+        </div>
+
+        <p class="start-footnote">
+          本作是《人民的名义》非商业同人策略游戏。人物、地名与情节取自小说背景，游戏内事件为虚构演绎。<br>
+          游戏进度自动保存在本机浏览器中。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 游戏主界面 ================= -->
+  <section id="game-screen" class="screen game-screen hidden">
+    <header class="topbar">
+      <div class="topbar__left">
+        <span class="brand-mark brand-mark--small">汉东</span>
+        <div class="topbar__title">
+          <strong>汉东仕途</strong>
+          <span id="topbar-place">汉东省 · 京州市</span>
+        </div>
+      </div>
+      <div class="topbar__center">
+        <span id="topbar-date">二〇一〇年 · 春</span>
+        <span class="topbar__dot"></span>
+        <span id="topbar-turn">第 1 年</span>
+      </div>
+      <div class="topbar__right">
+        <button id="btn-save" class="icon-btn" type="button" title="存档" aria-label="存档">
+          <span aria-hidden="true">存</span>
+        </button>
+        <button id="btn-help" class="icon-btn" type="button" title="玩法说明" aria-label="玩法说明">
+          <span aria-hidden="true">?</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="shell">
+      <aside class="sidebar">
+        <div id="sidebar-player" class="sidebar-card"></div>
+        <div id="sidebar-rank" class="sidebar-card sidebar-card--rank"></div>
+        <nav id="sidebar-nav" class="side-nav" aria-label="主导航"></nav>
+        <div class="sidebar-foot">
+          <span>汉东 · 京州</span>
+          <span class="sidebar-foot__seal">为人民服务</span>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section id="tab-career" class="tab-panel" data-panel="career"></section>
+        <section id="tab-affairs" class="tab-panel hidden" data-panel="affairs"></section>
+        <section id="tab-relations" class="tab-panel hidden" data-panel="relations"></section>
+        <section id="tab-family" class="tab-panel hidden" data-panel="family"></section>
+        <section id="tab-archive" class="tab-panel hidden" data-panel="archive"></section>
+      </main>
+    </div>
+
+    <nav id="bottom-nav" class="bottom-nav" aria-label="移动端导航"></nav>
+  </section>
+
+  <!-- ================= 结局页 ================= -->
+  <section id="ending-screen" class="screen ending-screen hidden">
+    <div id="ending-content" class="ending-shell"></div>
+  </section>
+</div>
+
+<div id="modal-root" class="modal-root" aria-live="polite"></div>
+<div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+<script src="js/data.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
